@@ -1,0 +1,342 @@
+{% extends 'base.html' %}
+{% load staticfiles%}
+
+{% block content %}
+
+<div class="prs_title_main_sec_wrapper">
+		<div class="prs_title_img_overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="prs_title_heading_wrapper">
+						<h2>Movies</h2>
+						<ul>
+							<li><a href="{% url 'home' %}">Home</a>
+							</li>
+							<li>&nbsp;&nbsp; >&nbsp;&nbsp; Movies</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+<div class="prs_mc_slider_main_wrapper">
+</div>
+
+
+
+<div class="prs_mc_category_sidebar_main_wrapper">
+
+
+<div class="container">
+    
+    
+    <div class="row">
+    
+    
+        <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 hidden-sm hidden-xs">
+					<div class="prs_mcc_left_side_wrapper">
+						<!-- 
+							<div class="prs_mcc_left_searchbar_wrapper">
+							<input type="text" placeholder="Search Movie">
+							<button><i class="flaticon-tool"></i>
+							</button>
+						</div>
+						-->
+						
+						<div class="prs_mcc_bro_title_wrapper">
+							<h2>browse title</h2>
+							<ul>
+								<li><i class="fa fa-caret-right"></i> &nbsp;&nbsp;&nbsp;<a href="#">All <span>{{ size }}</span></a> 
+								</li>
+                                
+                                {% for key, value in gsize.items %}
+                                
+								<li><i class="fa fa-caret-right"></i> &nbsp;&nbsp;&nbsp;<a href="/movie_category/{{ key }}">{{ key }} <span>{{ value }}</span></a> 
+								</li>
+                                
+                                {% endfor %}
+                                
+							</ul>
+						</div>
+						
+					</div>
+				</div>
+        
+        
+        
+        
+        <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            
+            <div class="prs_mcc_right_side_wrapper">
+						<div class="row">
+                            
+                            
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<div class="prs_mcc_right_side_heading_wrapper">
+									<h2 style="text-align: center">Movies</h2>
+									<!--
+										<ul class="nav nav-pills">
+										<li class="active"><a data-toggle="pill" href="#grid"><i class="fa fa-th-large"></i></a>
+										</li>
+										<li><a data-toggle="pill" href="#list"><i class="fa fa-list"></i></a>
+										</li>
+									</ul>
+									-->
+									
+								</div>
+							</div>
+                            
+                            
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+								<div class="tab-content">
+									<div id="grid" class="tab-pane fade in active">
+										<div class="row">
+                                            
+                                            {% for movie in movies %}
+                                            
+                                           
+                                            
+                                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 prs_upcom_slide_first">
+												<div class="prs_upcom_movie_box_wrapper prs_mcc_movie_box_wrapper">
+													<div class="prs_upcom_movie_img_box">
+														<img img height="350" width="300" onerror="this.src='{% static 'images\content\movie_category\up1.jpg' %}'" src="{% static movie.path %}" alt="movie_img" />
+														<div class="prs_upcom_movie_img_overlay"></div>
+														<div class="prs_upcom_movie_img_btn_wrapper">
+															<ul>
+																<li>
+																</li>
+																<li><a href="{% url 'movie_detail' movie.movieid %}">View Details</a>
+																</li>
+															</ul>
+														</div>
+													</div>
+													<div class="prs_upcom_movie_content_box">
+														<div class="prs_upcom_movie_content_box_inner">
+															<h4 style="white-space: nowrap; overflow: hidden; text-overflow:ellipsis"><a href="#">{{ movie.title }}</a></h4>
+															<p style="white-space: nowrap; overflow: hidden;text-overflow:ellipsis">{{ movie.genres }}</p>	
+                                                            
+                                                            <div id="rating{{movie.movieid }}"></div>
+                                                            
+                                                                <script>
+                                                            
+                                                            $('#rating{{movie.movieid }}').addRating({ icon : 'star', fieldId : 'rating{{movie.movieid }}' });
+                                                                
+                                                                $('#rating{{movie.movieid }}').click(function(){
+                                                                   
+                                                                    var rate = $('#rating{{movie.movieid }}').val();
+                                                                    
+                                                                    
+                                                                    $.post('/add_rating/'+rate+'/{{movie.movieid }}/', { csrfmiddlewaretoken: '{{ csrf_token }}' }, function(){
+                                                                        
+                                                                        alert("Rating Recorded!")
+                                                                        
+                                                                    }).fail(function(){
+                                                                        
+                                                                        
+                                                                        alert("You Have Already Rated The Movie!")
+                                                                        
+                                                                    });
+                                                                    
+                                                                    
+                                                                });
+                                                            
+                                                            </script>
+                                                            
+                                                            	
+                                                            
+                                                            
+                                                            
+														</div>
+														
+													</div>
+												</div>
+											</div>
+                                            
+                                            
+                                            
+                                            {% endfor %}
+                                            
+                                            <style>
+		@font-face {
+			font-family: 'Material Icons';
+			font-style: normal;
+			font-weight: 400;
+			src: local('Material Icons'), local('MaterialIcons-Regular'), url(https://fonts.gstatic.com/s/materialicons/v7/2fcrYFNaTjcS6g4U3t-Y5UEw0lE80llgEseQY3FEmqw.woff2) format('woff2'), url(https://fonts.gstatic.com/s/materialicons/v7/2fcrYFNaTjcS6g4U3t-Y5RV6cRhDpPC5P4GCEJpqGoc.woff) format('woff');
+		}
+		.material-icons {
+			font-family: 'Material Icons';
+			font-weight: normal;
+			font-style: normal;
+			font-size: 24px;
+			line-height: 1;
+			letter-spacing: normal;
+			text-transform: none;
+			display: inline-block;
+			word-wrap: normal;
+			-moz-font-feature-settings: 'liga';
+			-moz-osx-font-smoothing: grayscale;
+		}
+		i {
+			cursor :  pointer;
+		}
+	</style>
+                                                            
+                                                            
+                                                            
+                                                       
+                                            
+                                            
+                                            
+                                           <div style="position:relative; left:20%; width:100%" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+												<div class="pager_wrapper gc_blog_pagination">
+													<ul class="pagination">
+                                                        
+                                                        {% if movies.has_previous %}
+                                                        <li><a href="?page={{ movies.previous_page_number }}"><i class="flaticon-left-arrow"></i></a>
+														</li>
+                                                        {% else %}
+                                                        <li class="disabled"><a href="#"><i class="flaticon-left-arrow"></i></a>
+														</li>
+                                                        {% endif %}
+                                                        
+                                                        
+                                                        {% if movies.number|add:'-2' > 1 %}
+    <li><a href="?page={{ movies.number|add:'-3' }}">&hellip;</a></li>
+{% endif %}
+                                                        
+                                                        {% for i in movies.paginator.page_range %}
+                                                        
+                                                        {% if movies.number == i %}
+                                                        <li class="active"><a href="#">{{ i }}</a>
+														</li>
+                                                        {% elif i > movies.number|add:'-3' and i < movies.number|add:'3' %}
+                                                        <li><a href="?page={{ i }}">{{ i }}</a>
+														</li>
+                                                         {% endif %}
+                                                        
+                                                        {% endfor %}
+                                                        
+														
+                                                        {% if movies.paginator.num_pages > movies.number|add:'2' %}
+    <li><a href="?page={{ movies.number|add:'3' }}">&hellip;</a></li>
+{% endif %}
+
+                                                        
+                                                        {% if movies.has_next %}
+														<li><a href="?page={{ movies.next_page_number }}"><i class="flaticon-right-arrow"></i></a>
+														</li>
+                                                        {% else %}
+                                                        <li class="disabled"><a href="#"><i class="flaticon-right-arrow"></i></a>
+														</li>
+                                                        {% endif %}
+                                                        
+                                                        
+                                                        
+													</ul>
+												</div>
+											</div>
+                                            
+                                            
+                                          
+                                            
+                                            
+                                            
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                    <!-- 
+                                    <div id="list" class="tab-pane fade">
+										<div class="row">
+                                            
+                                            
+                                            	<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+												<div class="prs_mcc_list_movie_main_wrapper">
+													<div class="prs_mcc_list_movie_img_wrapper">
+														<img src="{% static 'images/content/movie_category/up1.jpg' %}" alt="categoty_img">
+													</div>
+													<div class="prs_mcc_list_movie_img_cont_wrapper">
+														<div class="prs_mcc_list_left_cont_wrapper">
+															<h2>Busting Car</h2>
+															<p>Drama , Acation &nbsp;&nbsp;&nbsp;<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+															</p>
+															<h4>Movie Director - Jhon Doe</h4>
+														</div>
+														<div class="prs_mcc_list_right_cont_wrapper">	<a href="#"><i class="flaticon-cart-of-ecommerce"></i></a>
+														</div>
+														<div class="prs_mcc_list_bottom_cont_wrapper">
+															<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis trud exercitation ullamco.</p>
+															<ul>
+																<li><a href="#">View Trailer</a>
+																</li>
+																<li><a href="#">View Details</a>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+                                            
+                                            
+                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+												<div class="pager_wrapper gc_blog_pagination">
+													<ul class="pagination">
+														<li><a href="#"><i class="flaticon-left-arrow"></i></a>
+														</li>
+														<li><a href="#">1</a>
+														</li>
+														<li><a href="#">2</a>
+														</li>
+														<li class="prs_third_page"><a href="#">3</a>
+														</li>
+														<li class="hidden-xs"><a href="#">4</a>
+														</li>
+														<li><a href="#"><i class="flaticon-right-arrow"></i></a>
+														</li>
+													</ul>
+												</div>
+											</div>
+                                            
+                                            
+                                        </div>
+                                    </div>
+								    -->
+                                    
+                                    
+                                    
+                                </div>
+                            </div>
+                            
+                            
+                            
+                            
+                </div>
+            </div>
+            
+            
+            
+            
+            
+        </div>
+        
+        
+        
+        
+        
+    
+    </div>
+    
+    
+    </div>
+
+
+</div>
+
+{% endblock %}

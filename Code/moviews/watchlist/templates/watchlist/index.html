@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+{% load staticfiles%}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div class="prs_title_main_sec_wrapper">
+		<div class="prs_title_img_overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="prs_title_heading_wrapper">
+						<h2>History</h2>
+						<ul>
+							<li><a href="{% url 'watchlist' %}">Home</a>
+							</li>
+							<li>&nbsp;&nbsp; >&nbsp;&nbsp; History</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<div class="container" style="margin-top:400px; margin-bottom: 50px; ">
+
+    <div >
+<h1>Movie History</h1>
+<br />
+
+{% for movie,t in movie_view.items %}
+
+<p>You viewed {{ movie  }} at {{ t }} </p>
+<br />
+
+
+{% endfor %}
+        <hr />
+
+<h1>Event History</h1>
+
+<br />
+
+{% for movie,t in event_view.items %}
+
+<p>You viewed {{ movie  }} at {{ t }} </p>
+<br />
+
+
+{% endfor %}
+
+          <hr />
+<h1>Celeb History</h1>
+<br />
+
+{% for movie,t in celeb_view.items %}
+
+
+<p>You viewed {{ movie  }} at {{ t }} </p>
+<br />
+
+{% endfor %}
+          <hr />
+        
+        </div>
+    
+	</div>
+
+{% else %}	
+<div class="prs_title_main_sec_wrapper">
+		<div class="prs_title_img_overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="prs_title_heading_wrapper">
+						<h2>History</h2>
+						<ul>
+							<li><a href="{% url 'watchlist' %}">Home</a>
+							</li>
+							<li>&nbsp;&nbsp; >&nbsp;&nbsp; History</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+<div class="container" style="margin-top:400px; margin-bottom: 50px; ">
+
+    <div style="text-align: center">
+<h1>Please Login First</h1>
+<br />
+        </div>
+    
+	</div>
+{% endif %}
+{% endblock %}

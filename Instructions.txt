@@ -1,0 +1,18 @@
+1. Install Python  2.7.16
+
+2. Install django 1.11.16
+   - Install Pip
+
+3. Create schema in mysql workbench - "moviews" ( User=root,Password=abcd123 )
+
+4. Import moviews.sql in db
+
+5. Copy three folders from code and paste in e drive
+
+6. Open CMD ->"location-of-moviews(folder)"
+
+7. Run command "python manage.py runserver "
+
+8.Install all depemdencies which will be shown e.g [if error is no module named found :pickle" -> run command in cmd "pip install pickle"]
+
+9. Open chrome : http://localhost:8000/home

@@ -1,0 +1,14 @@
+ccollections
+defaultdict
+p1
+(c__builtin__
+dict
+p2
+tRp3
+I0
+(dp4
+I0
+I45
+sI2
+I69
+ss.

@@ -1,0 +1,126 @@
+{% extends 'base.html' %}
+{% load staticfiles%}
+
+{% block content %}
+
+
+
+
+<div class="prs_title_main_sec_wrapper">
+		<div class="prs_title_img_overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="prs_title_heading_wrapper">
+						<h2>{{data.title}}</h2>
+						<ul>
+							<li><a href="{% url 'home' %}">Home</a>
+							</li>
+							<li>&nbsp;&nbsp; >&nbsp;&nbsp; Movie</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+<div class="prs_es_about_main_section_wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+					<div class="prs_es_about_left_wrapper">
+						<h2>About the Movie</h2>
+						
+                        
+                          <br />   
+                         <br />  
+                        
+                        
+                    <strong>Plot: </strong> <span style="text-align: justify">{{ data.description }}</span>      
+                        
+                        
+                    <br />   
+                         <br />  
+                        
+                <strong>Director: </strong>       {{ data.director }}
+                        
+                        <br />
+                         <br />  
+                        
+                        
+                 <strong>Writers: </strong>      {{ data.writers }}
+                        
+                        
+                        <br />
+                         <br />  
+                        
+                  <strong>Stars: </strong>     {{ data.stars }}
+                        
+                        
+                        <br />  
+                         <br />  
+                        
+                  <strong>Runtime: </strong>      {{ data.runtime }}
+                        
+                        
+                        <br />  
+                         <br />  
+                        
+                  <strong>Genres: </strong>      {{ data.genres }}
+                        
+                        
+                        
+                        
+                        
+					</div>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+					
+                    
+                    
+                  
+                    
+						
+							
+                                
+                                
+                                
+								<img  width="186px" height="268px" src="{% static data.path %}" alt="movie_img">
+                                
+                                
+                                
+                    
+                            
+                            
+                            
+                            
+                            
+                            
+                            <iframe style="position:absolute; right:0px;" id="ytplayer" type="text/html" width="370" height="270"
+  src="https://www.youtube.com/embed/{{ data.trailer }}"
+  ></iframe>
+                            
+                            
+                            
+                            
+                    
+                            
+                            
+							
+						
+					
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+{% endblock %}

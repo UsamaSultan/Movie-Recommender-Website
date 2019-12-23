@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% load staticfiles%}
+
+{% block content %}
+
+
+<div class="prs_title_main_sec_wrapper">
+		<div class="prs_title_img_overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="prs_title_heading_wrapper">
+                        {% if search %}
+						<h2>You searched for: {{ search }}</h2>
+                        {% else %}
+                        <h2>Events</h2>
+                        {% endif %}
+                        
+						<ul>
+							<li><a href="{% url 'home' %}">Home</a>
+							</li>
+							<li>&nbsp;&nbsp; >&nbsp;&nbsp; Events</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+<div class="prs_ec_ue_main_section_wrapper">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<div class="prs_heading_section_wrapper">
+						<h2>Events</h2>
+					</div>
+				</div>
+                
+                
+                
+                
+                
+                
+                <div class="row">
+                
+                    
+                    
+                   <div class="col-lg-3 col-md-3 col-sm-3 col-xs-3 hidden-sm hidden-xs">
+					<div class="prs_mcc_left_side_wrapper">
+						
+						<div class="prs_mcc_bro_title_wrapper">
+							<h2>browse events</h2>
+							<ul>
+								
+                                {% for category in categories %}
+                                
+                                <li><i class="fa fa-caret-right"></i> &nbsp;&nbsp;&nbsp;<a href="{% url 'event_category' category.category %}">{{ category.category }} <span>{{ category.category__count }}</span></a> 
+								</li>
+                                
+                                {% endfor %}
+								
+							</ul>
+						</div>
+						
+					</div>
+				</div>
+        
+                    
+                    
+                <div class="col-lg-9 col-md-9 col-sm-9 col-xs-9">    
+                
+                {% for event in events %}
+
+
+
+
+
+
+                
+                
+				
+				<div class="col-lg-4 col-md-4 col-sm-12 col-xs-12 prs_upcom_slide_first">
+					<div class="prs_upcom_movie_box_wrapper prs_mcc_movie_box_wrapper">
+						<div class="prs_upcom_movie_img_box custom-box">
+							<img height="350" width="300" src="{% static 'images/event_images/' %}{{event.image_url}}" alt="feature_img">
+							<div class="prs_upcom_movie_img_overlay"></div>
+							<div class="prs_upcom_movie_img_btn_wrapper custom_wrapper">
+								<ul>
+									<li><a href="{% url 'event_detail' event.id %}">View Description</a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="prs_feature_img_cont">
+							<h2 style="font-size:16px;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{event.title}}</h2>
+							<div class="prs_ft_small_cont_left">
+								<p style="font-size:14px;white-space: nowrap;"><strong>Category: </strong>{{ event.category }}</p>
+							</div>
+							
+							<ul>
+								<li>{{ event.date }}</li>
+								<li></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+                
+                
+                
+                
+        {% endfor %}        
+                
+                
+                    </div>
+                    
+				</div>
+			
+                
+                
+                <div style="position:relative; left:40%; width:100%" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+												<div class="pager_wrapper gc_blog_pagination">
+													<ul class="pagination">
+                                                        
+                                                        {% if events.has_previous %}
+                                                        <li><a href="?page={{ events.previous_page_number }}"><i class="flaticon-left-arrow"></i></a>
+														</li>
+                                                        {% else %}
+                                                        <li class="disabled"><a href="#"><i class="flaticon-left-arrow"></i></a>
+														</li>
+                                                        {% endif %}
+                                                        
+                                                        
+                                                        {% if events.number|add:'-2' > 1 %}
+    <li><a href="?page={{ events.number|add:'-3' }}">&hellip;</a></li>
+{% endif %}
+                                                        
+                                                        {% for i in events.paginator.page_range %}
+                                                        
+                                                        {% if events.number == i %}
+                                                        <li class="active"><a href="#">{{ i }}</a>
+														</li>
+                                                        {% elif i > events.number|add:'-3' and i < events.number|add:'3' %}
+                                                        <li><a href="?page={{ i }}">{{ i }}</a>
+														</li>
+                                                         {% endif %}
+                                                        
+                                                        {% endfor %}
+                                                        
+														
+                                                        {% if events.paginator.num_pages > events.number|add:'2' %}
+    <li><a href="?page={{ events.number|add:'3' }}">&hellip;</a></li>
+{% endif %}
+
+                                                        
+                                                        {% if events.has_next %}
+														<li><a href="?page={{ events.next_page_number }}"><i class="flaticon-right-arrow"></i></a>
+														</li>
+                                                        {% else %}
+                                                        <li class="disabled"><a href="#"><i class="flaticon-right-arrow"></i></a>
+														</li>
+                                                        {% endif %}
+                                                        
+                                                        
+                                                        
+													</ul>
+												</div>
+											</div>
+                
+                
+                
+            
+                
+                
+			</div>
+		</div>
+	</div>
+
+
+
+                                            
+
+
+{% endblock %}
